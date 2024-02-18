@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-4e+nrv4!u=va_qqzgr)n6$_gfz72s$s44rrq(94#i#@7lwby#a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'alpha.ingenios.com']
-CSRF_TRUSTED_ORIGINS = ['https://alpha.ingenios.com']
+ALLOWED_HOSTS = ['127.0.0.1']
+CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'calltoaction',
     'sectionselection',
     'hero',
+    'testimonials',
+    'colorfield',
 ]
 
 MIDDLEWARE = [
@@ -92,8 +94,8 @@ WSGI_APPLICATION = 'alpha.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'alpha',
-        'USER': 'django',
+        'NAME': '',
+        'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',

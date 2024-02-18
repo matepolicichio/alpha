@@ -1,8 +1,12 @@
 /* Fonts */
 :root {
-  --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-primary: "Montserrat", sans-serif;
-  --font-secondary: "Lato", sans-serif;
+  --font-default: 'Open Sans', 'Montserrat', 'Lato', 'Inter', sans-serif;
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Amatic SC', sans-serif;
+  --font-tertiary: 'Montserrat', sans-serif;
+  --font-quaternary: 'Lato', sans-serif;
+  --font-quinary: 'Inter', sans-serif;
+  --font-special: 'Amatic SC', cursive;
 }
 
 /* Global Colors */
@@ -11,8 +15,8 @@
   --color-default-rgb: 33, 37, 41;
   --color-background: #ffffff;
   --color-background-rgb: 255, 255, 255;
-  --color-primary: #32869e;
-  --color-primary-rgb: 50, 134, 158;
+  --color-primary: #0084c9;
+  --color-primary-rgb: 0, 132, 201;
   --color-secondary: #32353a;
   --color-secondary-rgb: 50, 134, 158;
   --color-box-background: #ffffff;
@@ -77,7 +81,8 @@ section {
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
+  padding-bottom: 20px;
 }
 
 .section-title h2 {
@@ -107,6 +112,57 @@ section {
 .section-title p {
   margin-bottom: 0;
 }
+
+
+/*--------------------------------------------------------------
+# Sections & Section Header from Yummy
+--------------------------------------------------------------*/
+/* section {
+  overflow: hidden;
+  padding: 80px 0;
+} */
+
+.section-bg {
+  background-color: #eee;
+}
+
+.section-header {
+  text-align: center;
+  /* padding-bottom: 30px; */
+  padding-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: #7f7f90;
+  text-transform: uppercase;
+  font-family: var(--font-default);
+}
+
+.section-header p {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 400;
+  font-family: var(--font-secondary);
+}
+
+.section-header .font-default {
+  margin: 0;
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  font-family: var(--font-default);
+}
+
+
+.section-header p span {
+  color: var(--color-primary);
+}
+
 
 /*--------------------------------------------------------------
 # Page Title & Breadcrumbs
@@ -161,24 +217,28 @@ section {
   --color-inverse: #ffffff;
   color: var(--color-default);
   background-color: var(--color-background);
+  height: 100px;
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
 }
 
 .header .logo img {
-  /* max-height: 40px; */
+  max-height: 60px;
   margin-right: 6px;
-  /* fill: var(--color-secondary);
-  stroke: red;
-  stroke-width: 0.25;
-  stroke-miterlimit: 10; */
 }
 
 .header .logo h1 {
-  font-size: 24px;
+  font-size: 32px;
   margin: 0;
   font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.header .logo h2 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 400;
   color: var(--color-secondary);
 }
 
@@ -191,7 +251,24 @@ section {
 
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
-  color: var(--color-primary);
+  color: var(--color-inverse);
+  background: var(--color-primary);
+  font-size: 14px;
+  padding: 8px 26px;
+  margin: 0;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.header .btn-getstarted:hover,
+.header .btn-getstarted:focus:hover {
+  color: var(--color-inverse);
+  background: rgba(var(--color-primary-rgb), 0.85);
+}
+
+.header .btn-whatsapp,
+.header .btn-whatsapp:focus {
+  color: var(--color-secondary);
   /* background: var(--color-primary); */
   /* font-size: 14px; */
   font-size: 30px; /*added*/
@@ -201,9 +278,9 @@ section {
   transition: 0.3s;
 }
 
-.header .btn-getstarted:hover,
-.header .btn-getstarted:focus:hover {
-  color: var(--color-primary);
+.header .btn-whatsapp:hover,
+.header .btn-whatsapp:focus:hover {
+  /* color: var(--color-secondary); */
   font-size: 35px; /*added*/
   /* background: rgba(var(--color-primary-rgb), 0.85); */
 }
@@ -214,13 +291,19 @@ section {
   }
 
   .header .btn-getstarted {
+    order: 3;
+    margin: 0 15px 0 0;
+    padding: 6px 20px;
+  }
+
+  .header .btn-whatsapp {
     order: 2;
     margin: 0 15px 0 0;
     padding: 6px 20px;
   }
 
   .header .navmenu {
-    order: 3;
+    order: 4;
   }
 }
 
@@ -289,9 +372,11 @@ section {
   .navmenu a:focus {
     color: var(--color-nav);
     padding: 18px 15px;
-    font-size: 16px;
+    /* font-size: 16px; */
+    font-size: 26px;
     font-family: var(--font-secondary);
-    font-weight: 400;
+    /* font-weight: 400; */
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -426,7 +511,7 @@ section {
 @media (max-width: 1199px) {
   .mobile-nav-toggle {
     color: var(--color-nav);
-    font-size: 28px;
+    font-size: 50px;
     line-height: 0;
     margin-right: 10px;
     cursor: pointer;
@@ -553,21 +638,6 @@ section {
 # Scroll Top Button
 --------------------------------------------------------------*/
 
-/* scroll-top: This is a class selector that targets elements with the class "scroll-top". */
-/*  [martin]
-    position: fixed;: The element is positioned relative to the browser window and remains fixed even when scrolling.
-    visibility: hidden;: The element is initially hidden.
-    opacity: 0;: The element is initially transparent.
-    right: 15px;: The element is positioned 15 pixels from the right edge of its containing element.
-    bottom: 15px;: The element is positioned 15 pixels from the bottom edge of its containing element.
-    z-index: 99999;: The element is placed on a higher stacking order compared to other elements.
-    background-color: var(--color-primary);: The background color is set using a custom CSS variable called "--color-primary".
-    width: 40px;: The width of the element is set to 40 pixels.
-    height: 40px;: The height of the element is set to 40 pixels.
-    border-radius: 4px;: The corners of the element are rounded with a border radius of 4 pixels.
-    transition: all 0.4s;: The element will transition smoothly over a duration of 0.4 seconds when its properties change.
-*/
-
 .scroll-top {
   position: fixed;
   visibility: hidden;
@@ -583,14 +653,6 @@ section {
 }
 
 
-/* [martin]
-.scroll-top i: This selector targets the child <i> element within the elements with the "scroll-top" class.
-font-size: 24px;: The font size of the <i> element is set to 24 pixels.
-color: #ffffff;: The text color of the <i> element is set to white.
-line-height: 0;: The line height of the <i> element is set to 0, effectively removing any vertical space around the element. 
-*/
-
-
 .scroll-top i {
   font-size: 24px;
   color: #ffffff;
@@ -598,24 +660,10 @@ line-height: 0;: The line height of the <i> element is set to 0, effectively rem
 }
 
 
-/* [martin]
-.scroll-top:hover: This selector targets the elements with the "scroll-top" class when they are being hovered.
-
-background-color: rgba(var(--color-primary-rgb), 0.8);: The background color of the element is changed to a slightly transparent version of the custom CSS variable "--color-primary".
-color: #ffffff;: The text color of the element is set to white. */
-
 .scroll-top:hover {
   background-color: rgba(var(--color-primary-rgb), 0.8);
   color: #ffffff;
 }
-
-
-/* [martin]
-.scroll-top.active: This selector targets elements with the "scroll-top" class that also have the "active" class.
-
-visibility: visible;: The element is made visible.
-opacity: 1;: The element is fully opaque.
-*/
 
 
 .scroll-top.active {
@@ -699,6 +747,54 @@ opacity: 1;: The element is fully opaque.
     transform: translate(24px, 0);
   }
 }
+
+
+/*--------------------------------------------------------------
+# Preloader2
+--------------------------------------------------------------*/
+#preloader2 {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.6s ease-out;
+  width: 100%;
+  height: 100vh;
+}
+
+#preloader2:before,
+#preloader2:after {
+  content: "";
+  position: absolute;
+  border: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: animate-preloader2 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+#preloader2:after {
+  animation-delay: -0.5s;
+}
+
+@keyframes animate-preloader2 {
+  0% {
+    width: 10px;
+    height: 10px;
+    top: calc(50% - 5px);
+    left: calc(50% - 5px);
+    opacity: 1;
+  }
+
+  100% {
+    width: 72px;
+    height: 72px;
+    top: calc(50% - 36px);
+    left: calc(50% - 36px);
+    opacity: 0;
+  }
+}
+
+
 
 /*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
@@ -830,6 +926,100 @@ opacity: 1;: The element is fully opaque.
   font-size: 13px;
 }
 
+
+/*--------------------------------------------------------------
+# Footer2
+--------------------------------------------------------------*/
+.footer2 {
+  font-size: 14px;
+  background-color: #1f1f24;
+  padding: 50px 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer2 .icon {
+  margin-right: 15px;
+  font-size: 24px;
+  line-height: 0;
+}
+
+.footer2 h4 {
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 5px;
+  color: #fff;
+}
+
+.footer2 .footer-links {
+  margin-bottom: 30px;
+}
+
+.footer2 .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer2 .footer-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.footer2 .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+.footer2 .footer-links ul a {
+  color: rgba(255, 255, 255, 0.6);
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+
+.footer2 .footer-links ul a:hover {
+  color: #fff;
+}
+
+.footer2 .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.footer2 .social-links a:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.footer2 .copyright {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer2 .credits {
+  padding-top: 4px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.footer2 .credits a {
+  color: #fff;
+}
+
+
+
+
 /*--------------------------------------------------------------
 # Home Page
 --------------------------------------------------------------*/
@@ -838,7 +1028,7 @@ opacity: 1;: The element is fully opaque.
 .hero {
   --color-default: #ffffff;
   --color-default-rgb: 255, 255, 255;
-  --color-background:transparent;
+  --color-background: transparent;
   --color-background-rgb: 0, 0, 0;
   width: 100%;
   min-height: 100vh;
@@ -1035,22 +1225,30 @@ opacity: 1;: The element is fully opaque.
 }
 
 .about .icon-box {
-  padding: 50px 40px;
+  padding: 40px 40px;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  transition: all 0.3s ease-out 0s;
   background-color: var(--color-box-background);
+  transition: all 0.3s ease-out 0s;
 }
 
+.about .icon-box:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(var(--color-default-rgb), 0.2);
+  /* color: var(--color-inverse); */
+}
+
+
 .about .icon-box i {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 10%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
-  font-size: 32px;
+  /* font-size: 28px;  */
   line-height: 0;
   transition: all 0.4s ease-out 0s;
   background-color: rgba(var(--color-primary-rgb), 0.05);
@@ -1075,7 +1273,7 @@ opacity: 1;: The element is fully opaque.
 
 .about .icon-boxes .col-md-6:nth-child(2) .icon-box,
 .about .icon-boxes .col-md-6:nth-child(4) .icon-box {
-  margin-top: -40px;
+  margin-top: 0px;
 }
 
 @media (max-width: 768px) {
@@ -1681,12 +1879,23 @@ opacity: 1;: The element is fully opaque.
 
 .team .member .member-img {
   margin: 0 80px;
-  border-radius: 10%;
+  border-radius: 50%;
+  /* clip-path: circle(40% at 50% 40%); */
   overflow: hidden;
   position: relative;
-  border: 4px solid var(--color-box-background);
+  border: 1px solid var(--color-box-background);
   box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s; /* Adding a smooth transition effect */
 }
+
+
+.team .member .member-img:hover {
+  opacity: 0.6;
+  border: 1px solid var(--color-box-background);
+  transform: scale(1.2);
+}
+
+
 
 @media (max-width: 1024px) {
   .team .member .member-img {
@@ -1997,7 +2206,7 @@ opacity: 1;: The element is fully opaque.
 
 /* Contact Section - Home Page
 ------------------------------*/
-.contact {
+/* .contact {
   --color-box-background: #f7f7f7;
 }
 
@@ -2025,7 +2234,59 @@ opacity: 1;: The element is fully opaque.
   line-height: 24px;
   font-size: 14px;
   margin-bottom: 0;
+} */
+
+
+/*--------------------------------------------------------------
+# Contact Section from Yummy
+--------------------------------------------------------------*/
+.contact .info-item {
+  background: #f4f4f4;
+  padding: 30px;
+  height: 100%;
 }
+
+.contact .info-item .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  line-height: 0;
+  color: #fff;
+  background: var(--color-primary);
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.contact .info-item h3 {
+  font-size: 20px;
+  color: #6c757d;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+}
+
+.contact .info-item p {
+  padding: 0;
+  margin: 0;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.contact .info-item .social-links a {
+  font-size: 24px;
+  display: inline-block;
+  color: rgba(55, 55, 63, 0.7);
+  line-height: 1;
+  margin: 4px 6px 0 0;
+  transition: 0.3s;
+}
+
+.contact .info-item .social-links a:hover {
+  color: var(--color-primary);
+}
+
 
 .contact .php-email-form {
   background: var(--color-box-background);
@@ -2033,6 +2294,15 @@ opacity: 1;: The element is fully opaque.
   height: 100%;
 }
 
+.contact .email-form {
+  width: 100%;
+  margin-top: 30px;
+  background: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* 
 .contact .php-email-form .error-message {
   display: none;
   background: #df1529;
@@ -2071,9 +2341,9 @@ opacity: 1;: The element is fully opaque.
   border: 3px solid var(--color-primary);
   border-top-color: var(--color-background);
   animation: animate-loading 1s linear infinite;
-}
+} */
 
-.contact .php-email-form input[type=text],
+/* .contact .php-email-form input[type=text],
 .contact .php-email-form input[type=email],
 .contact .php-email-form textarea {
   font-size: 14px;
@@ -2103,6 +2373,9 @@ opacity: 1;: The element is fully opaque.
   color: rgba(var(--color-default-rgb), 0.3);
 }
 
+*/
+
+
 .contact .php-email-form button[type=submit] {
   background: var(--color-primary);
   color: var(--color-inverse);
@@ -2112,7 +2385,18 @@ opacity: 1;: The element is fully opaque.
   border-radius: 4px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .email-form button[type=submit] {
+  background: var(--color-primary);
+  border: 0;
+  padding: 12px 40px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+
+
+.contact .php-email-form .email-form button[type=submit]:hover {
   background: rgba(var(--color-primary-rgb), 0.8);
 }
 
@@ -2428,11 +2712,37 @@ opacity: 1;: The element is fully opaque.
 /* Blog Section - Blog Page
 ------------------------------*/
 .blog .posts-list article {
+  position: relative;
+  overflow: hidden;
+  border: none;
   box-shadow: 0 4px 16px rgba(var(--color-default-rgb), 0.1);
   padding: 30px;
-  height: 100%;
   border-radius: 10px;
-  overflow: hidden;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+
+.blog .posts-list article:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(var(--color-default-rgb), 0.2);
+  /* Increase the size on hover */
+}
+
+.blog .sub-article{
+  position: relative;
+}
+
+.blog .sub-article .card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px; /* Adjust the padding as needed */
+  display: block;
+  text-decoration: none;
+  z-index: 1; /* Ensure the link is on top of other content within the card */
 }
 
 .blog .posts-list .post-img {
@@ -2580,12 +2890,12 @@ opacity: 1;: The element is fully opaque.
   margin-bottom: 20px;
 }
 
-.blog-details .meta-top {
+.meta-top {
   margin-top: 20px;
   color: rgba(var(--color-default-rgb), 0.6);
 }
 
-.blog-details .meta-top ul {
+.meta-top ul {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -2594,76 +2904,78 @@ opacity: 1;: The element is fully opaque.
   margin: 0;
 }
 
-.blog-details .meta-top ul li+li {
+.meta-top ul li+li {
   padding-left: 20px;
 }
 
-.blog-details .meta-top i {
+.meta-top i {
   font-size: 16px;
   margin-right: 8px;
   line-height: 0;
   color: rgba(var(--color-default-rgb), 0.6);
 }
 
-.blog-details .meta-top a {
+.meta-top a {
   color: rgba(var(--color-default-rgb), 0.6);
   font-size: 14px;
   display: inline-block;
   line-height: 1;
 }
 
-.blog-details .meta-bottom {
+.meta-bottom {
   padding-top: 10px;
   border-top: 1px solid rgba(var(--color-default-rgb), 0.1);
+  width: 100%;
+  z-index: 2;
 }
 
-.blog-details .meta-bottom i {
+.meta-bottom i {
   color: rgba(var(--color-default-rgb), 0.6);
   display: inline;
 }
 
-.blog-details .meta-bottom a {
+.meta-bottom a {
   color: rgba(var(--color-default-rgb), 0.6);
   transition: 0.3s;
 }
 
-.blog-details .meta-bottom a:hover {
+.meta-bottom a:hover {
   color: var(--color-primary);
 }
 
-.blog-details .meta-bottom .cats {
+.meta-bottom .cats {
   list-style: none;
   display: inline;
   padding: 0 20px 0 0;
   font-size: 14px;
 }
 
-.blog-details .meta-bottom .cats li {
+.meta-bottom .cats li {
   display: inline-block;
 }
 
-.blog-details .meta-bottom .tags {
+.meta-bottom .tags {
   list-style: none;
   display: inline;
   padding: 0;
   font-size: 14px;
 }
 
-.blog-details .meta-bottom .tags li {
+.meta-bottom .tags li {
   display: inline-block;
 }
 
-.blog-details .meta-bottom .tags li+li::before {
+.meta-bottom .tags li+li::before {
   padding-right: 6px;
   color: var(--color-default);
   content: ",";
 }
 
-.blog-details .meta-bottom .share {
+.meta-bottom .share {
   font-size: 16px;
 }
 
-.blog-details .meta-bottom .share i {
+.meta-bottom .share i {
   padding-left: 5px;
 }
 

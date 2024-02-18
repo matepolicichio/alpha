@@ -1,73 +1,107 @@
 {% load static %}
 
 <!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+<footer id="footer" class="footer2">
 
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="{% url 'base:index' %}" class="logo d-flex align-items-center">
-            <span>Alpha</span>
+  <div class="container">
+    <div class="row gy-3">
+      <div class="col-lg-3 col-md-6 d-flex">
+        <i class="bi bi-geo-alt-fill icon"></i>
+        <div>
+          <h4>{{ footer.address_title }}</h4>
+          {{ footer.address_description | safe }}
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links d-flex">
+        {% if footer.is_contacto_description_enabled %}
+        <i class="bi bi-whatsapp icon"></i>
+        <div>
+          <h4>{{ footer.contacto_title }}</h4>
+          {{ footer.contacto_description | safe }}
+        </div>
+        {% endif %}
+
+        {% if footer.is_whatsapp_enabled %}
+        <div class="text-center">
+          <a href="https://api.whatsapp.com/send?phone={{ footer.whats_number }}&text={{ footer.whats_message|urlencode }}"
+            data-aos="fade-up" data-aos-delay="300" class="whatsapp cta-btn" target="_blank">{{ footer.whats_btn_text }}<br>
+            <i class="bi bi-whatsapp"></i>
           </a>
-          <p>Comienza tu camino hacia una salud bucal óptima</p>
-          <div class="social-links d-flex mt-4">
-            <!-- <a href=""><i class="bi bi-twitter"></i></a> -->
-            <a href="https://www.facebook.com/CivicoDentalCareMexicali?mibextid=LQQJ4d" target="_blank"><i
-                class="bi bi-facebook"></i></a>
-            <a href="https://www.instagram.com/civicodentalcaremexicali/" target="_blank"><i
-                class="bi bi-instagram"></i></a>
-            <!-- <a href=""><i class="bi bi-linkedin"></i></a> -->
-          </div>
         </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Links más usados</h4>
-          <ul>
-            {% if sections %}
-            {% for nav in sections %}
-            {% if nav.is_visible and nav.nav_enabled and nav.page.template_path == 'base/index.html' %}
-              <li><a href="{% url 'base:index' %}#{{ nav.section.html_id }}">{{ nav.section.name }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Nuestros servicios</h4>
-          <ul>
-            {% if service_posts %}
-            {% for service in service_posts %}
-            <li><a href="{% url 'services:article-detail' service.pk %}">{{ service.title }}</a></li>
-            {% endfor %}
-            {% endif %}
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contacto</h4>
-          <p>Calzada Independencia 1086</p>
-          <p>Frente a Plaza Toros Calafia</p>
-          <p>Centro Cívico</p>
-          <p>21000 Mexicali, B.C.</p>
-          <p>México</p>
-          <p class="mt-4"><strong>Telefono USA:</strong> <span>+1.760.848.39.11</span></p>
-          <p><strong>Email:</strong> <span>cdccivico@gmail.com</span></p>
-        </div>
+        {% endif %}
 
       </div>
-    </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>&copy; <span>Copyright</span> <strong class="px-1">Cívico Dental Care</strong> <span>All Rights Reserved</span>
-      </p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      <div class="col-lg-3 col-md-6 footer-links d-flex">
+        <i class="bi bi-clock icon"></i>
+        <div>
+          <h4>{{ footer.horario_title }}</h4>
+          {{ footer.horario_description | safe }}
+        </div>
       </div>
-    </div>
 
-  </footer><!-- End Footer -->
+      <div class="col-lg-3 col-md-6 footer-links">
+        <h4>{{ footer.redes_title }}</h4>
+        <div class="social-links d-flex">
+
+          {% if footer.is_facebook_enabled %}
+          <a href="{{ footer.facebook_url }}" class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
+          {% endif %}
+
+          {% if footer.is_instagram_enabled %}
+          <a href="{{ footer.instagram_url }}" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+          {% endif %}
+
+          {% if footer.is_twitter_enabled %}
+          <a href="{{ footer.twitter_url }}" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
+          {% endif %}
+
+          {% if footer.is_linkedin_enabled %}
+          <a href="{{ footer.linkedin_url }}" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+          {% endif %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      {{ footer.copyright | safe }}
+    </div>
+    <div class="credits">
+      {{ footer.credits | safe }}
+    </div>
+  </div>
+
+
+<style>
+  .footer2 .cta-btn {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 40px;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin-top: 0px;
+    border: 1px solid var(--color-inverse);
+    color: var(--color-inverse);
+  }
+
+  .footer2 .cta-btn i {
+    font-size: 30px;
+  }
+  
+  .footer2 .cta-btn:hover {
+    background: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+</style>
+
+
+</footer><!-- End Footer -->
+<!-- End Footer -->

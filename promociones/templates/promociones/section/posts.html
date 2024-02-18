@@ -1,8 +1,11 @@
 <section id="{{ section_selection.section.html_id }}" class="blog">
-    <div class="container section-title" data-aos="fade-up">
+
+    <div class="container section-header" data-aos="fade-up">
         {% if promo_page_content %}
-        <a href="{% url 'promociones:home' %}"><h2>{{ promo_page_content.name }}</h2></a>
-        <p>{{ promo_page_content.description }}</p>
+        <a href="{% url 'promociones:home' %}">
+            <h2>{{ promo_page_content.name }}</h2>
+        </a>
+        {{ promo_page_content.description | safe }}
         {% endif %}
     </div>
 
@@ -10,7 +13,7 @@
     <div class="container">
         <div class="d-flex justify-content-end align-items-center">
             <a href="{% url 'promociones:add_post' %}"><i class="bi bi-plus-square-fill" style="font-size: 2em"></i></a>
-        </div>    
+        </div>
     </div>
     {% endif %}
 
@@ -22,19 +25,17 @@
             <div class="col-xl-4 col-md-6">
                 <article class="article">
 
+                    <div class="sub-article">
+                        <a href="{% url 'promociones:article-detail' post.pk %}" class="card-link"></a>
 
-                    <div class="post-img">
                         {% if post.header_image %}
-                        <a href="{% url 'promociones:article-detail' post.pk %}">
-                            <img src="{{ post.header_image.url }}" alt="..." class="img-fluid">
-                        </a>
+                        <div class="post-img">
+                            <a href="{% url 'promociones:article-detail' post.pk %}">
+                                <img src="{{ post.header_image.url }}" alt="..." class="img-fluid">
+                            </a>
+                        </div>
                         {% endif %}
-                    </div>
-                    
 
-                    <div class="d-flex align-items-center justify-content-between">
-
-                        <p class="post-category">{{ post.category }}</p>
                         {% if user.is_authenticated and user.is_staff %}
                         <div>
                             <small>
@@ -43,14 +44,55 @@
                             </small>
                         </div>
                         {% endif %}
+
+                        <h2 class="title">
+                            <a href="{% url 'promociones:article-detail' post.pk %}">{{ post.title }}</a>
+                        </h2>
+
+                        {% if post.show_meta_top %}
+                        <div class="meta-top my-2">
+                            <ul class="justify-content-start">
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                                    {% if post.author.profile %}
+                                    <a href="{% url 'members:show_profile' post.author.profile.id %}">
+                                        {{ post.author.first_name }}
+                                        {{ post.author.last_name }}
+                                    </a>
+                                    {% else %}
+                                    {{ post.author.first_name }}
+                                    {{ post.author.last_name }}
+                                    {% endif %}
+                                </li>
+    
+                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
+                                    <small>{{ post.post_date }}</small>
+                                </li>
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        <p class="post-category">{{ post.snippet }}</p>
                     </div>
 
-                    <h2 class="title">
-                        <a href="{% url 'promociones:article-detail' post.pk %}">{{ post.title }}</a>
-                    </h2>
+                    {% if post.show_meta_bottom %}
+                    <div class="meta-bottom">
+                        <i class="bi bi-folder"></i>
+                        <ul class="cats">
+                            {% for category in post.category2.all %}
+                            <li>{{ category.name }}</li>
+                            {% endfor %}
+                        </ul>
 
-                    <p class="post-category">{{ post.snippet }}</p>
+                        <i class="bi bi-tags"></i>
+                        <ul class="tags">
+                            {% for tag in post.tags.all %}
+                            <li>{{ tag.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
 
+                    {% comment %}
                     <div class="d-flex align-items-center justify-content-start">
 
                         {% if post.author.profile and post.author.profile.profile_pic %}
@@ -65,6 +107,7 @@
                             <p class="post-date">{{ post.post_date }}</p>
                         </div>
                     </div>
+                    {% endcomment %}
 
                 </article>
             </div>
