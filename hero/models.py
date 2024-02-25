@@ -1,20 +1,6 @@
 from django.db import models
+from base.config import CONTENT_DEFAULTS
 from django.core.exceptions import ValidationError
-
-
-message = """"Hola, me gustaría recibir más información sobre las *Promociones y Tratamientos de Dental Experience*.
-Enviado desde dental experience webapp https://dentalexperience.ingenios.com.ar
-
-Tratamiento: *...*
-_Distintivo: ..._
-https://dentalexperience.ingenios.com.ar/services
-
-Pack: *...*
-_Promo: ..._
-https://dentalexperience.ingenios.com.ar/promociones
-
-Muchas Gracias,"""
-
 
 def validate_numeric_whatsapp_number(value):
     if not value.isdigit():
@@ -22,11 +8,11 @@ def validate_numeric_whatsapp_number(value):
 
 class Hero(models.Model):
 
-    title = models.CharField(max_length=255, default="Cuidá tu sonrisa")
+    title = models.CharField(max_length=255, default="This is a Hero ...")
     description = models.TextField(
             null=True,
             blank=True,
-            default="Las mejores coberturas, los mejores profesionales.<br>Elegí tu plan dental.",
+            default="This is a description for the hero<br>and more ...",
             )
 
     background_image = models.ImageField(null=True, blank=True, upload_to="images/hero/", default=None)
@@ -41,10 +27,10 @@ class Hero(models.Model):
         null=True,
         blank=True,
         validators=[validate_numeric_whatsapp_number],
-        default="529984899792"
+        default=CONTENT_DEFAULTS['whats_number']
         )
-    whats_message = models.TextField(null=True, blank=True, default=message)
-    whats_btn_text = models.CharField(max_length=255, default="Contáctanos")
+    whats_message = models.TextField(null=True, blank=True, default=CONTENT_DEFAULTS['whats_message'])
+    whats_btn_text = models.CharField(max_length=255, default=CONTENT_DEFAULTS['whats_btn_text'])
     is_enabled = models.BooleanField(default=True)
  
     def __str__(self):

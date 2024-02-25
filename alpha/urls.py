@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('base.urls')),
     path('promociones/', include('promociones.urls')),
     path('services/', include('services.urls')),
+    path('testimonials/', include('testimonials.urls')),
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

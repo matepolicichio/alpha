@@ -19,7 +19,7 @@
           {% if nav_menu %}
           {% for nav in nav_menu %}
           {% if nav.nav_enabled %}
-              <li><a href="{% url 'base:index' %}#{{ nav.section.html_id }}">{{ nav.section.name }}</a></li>            
+              <li><a href="{% url 'base:index' %}#{{ nav.section_html_id }}">{{ nav.section_name }}</a></li>            
           {% endif %}
           {% endfor %}
           {% endif %}

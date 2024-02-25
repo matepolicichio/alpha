@@ -19,7 +19,7 @@ def index(request):
 
     sections = SectionSelection.objects.filter(
         is_visible=True,
-        page__template_path=template_path_filter)
+        page=template_path_filter)
     
     nav_menu = SectionSelection.objects.filter(
         nav_enabled=True)

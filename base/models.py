@@ -1,19 +1,6 @@
 from django.db import models
+from .config import CONTENT_DEFAULTS
 from django.core.exceptions import ValidationError
-
-
-message = """"Hola, me gustaría recibir más información sobre las *Promociones y Tratamientos de Dental Experience*.
-Enviado desde dentalexperience webapp https://dentalexperience.ingenios.com.ar
-
-Tratamiento: *...*
-_Distintivo: ..._
-https://dentalexperience.ingenios.com.ar/services
-
-Pack: *...*
-_Promo: ..._
-https://dentalexperience.ingenios.com.ar/promociones
-
-Muchas Gracias,"""
 
 def validate_numeric_whatsapp_number(value):
     if not value.isdigit():
@@ -31,7 +18,7 @@ class Contact(models.Model):
 class Header(models.Model):
 
     logo_image = models.ImageField(null=True, blank=True, upload_to="images/header/", default=None)
-    logo_text = models.CharField(max_length=255, default='<div class="d-flex flex-column"><h1 class="no-margin">Dental</h1><h2 class="no-margin">EXPERIENCE</h2></div>')
+    logo_text = models.CharField(max_length=255, default='<div class="d-flex flex-column"><h1 class="no-margin">Logo</h1><h2 class="no-margin">LOGO</h2></div>')
     
     is_getstarted_enabled = models.BooleanField(default=False)
     getstarted_link2section = models.CharField(max_length=255, default="nosotros")
@@ -43,10 +30,10 @@ class Header(models.Model):
         null=True,
         blank=True,
         validators=[validate_numeric_whatsapp_number],
-        default="529984899792"
+        default=CONTENT_DEFAULTS['whats_number']
         )
-    whats_message = models.TextField(null=True, blank=True, default=message)
-    whats_btn_text = models.CharField(max_length=255, default="Contáctanos")
+    whats_message = models.TextField(null=True, blank=True, default=CONTENT_DEFAULTS['whats_message'])
+    whats_btn_text = models.CharField(max_length=255, default=CONTENT_DEFAULTS['whats_btn_text'])
  
     def __str__(self):
         return "Header"
@@ -55,9 +42,9 @@ class Footer(models.Model):
     address_title = models.CharField(max_length=255, default="Dirección")
     address_description = models.TextField(
         default='''<p>
-Plaza las Torres Av. Las Torres Sm 55 lote 3<br>
-Local 10, Planta Alta<br>
-77533 Cancún, México<br>
+Zavalia 2174 P4. Barrio de Belgrano<br>
+Buenos Aires<br>
+Argentina<br>
 </p>''')
     
     contacto_title = models.CharField(max_length=255, default="Contáctanos")
@@ -65,9 +52,9 @@ Local 10, Planta Alta<br>
     contacto_description = models.TextField(
         default='''<p>
 <strong>Whatsapp:</strong><br>
-<span> +52 998 489 9792</span><br>
+<span> +54 911 3333 2216</span><br>
 <strong>Email:</strong><br>
-<span> info@example.com</span><br>
+<span> ingenioswebapps@gmail.com</span><br>
 </p>''')
 
     is_whatsapp_enabled = models.BooleanField(default=True)
@@ -76,10 +63,10 @@ Local 10, Planta Alta<br>
         null=True,
         blank=True,
         validators=[validate_numeric_whatsapp_number],
-        default="529984899792"
+        default=CONTENT_DEFAULTS['whats_number']
         )
-    whats_message = models.TextField(null=True, blank=True, default=message)
-    whats_btn_text = models.CharField(max_length=255, default="Contáctanos")
+    whats_message = models.TextField(null=True, blank=True, default=CONTENT_DEFAULTS['whats_message'])
+    whats_btn_text = models.CharField(max_length=255, default=CONTENT_DEFAULTS['whats_btn_text'])
 
     horario_title = models.CharField(max_length=255, default="Horarios")
     horario_description = models.TextField(
@@ -92,21 +79,21 @@ Local 10, Planta Alta<br>
  
     redes_title = models.CharField(max_length=255, default="Seguinos")
     is_facebook_enabled = models.BooleanField(default=False)
-    facebook_url = models.URLField(default='https://www.facebook.com/DentalExperienceCancun')
+    facebook_url = models.URLField(default='https://www.facebook.com/')
     is_instagram_enabled = models.BooleanField(default=False)
-    instagram_url = models.URLField(default='https://www.instagram.com/dental_experience1/')
+    instagram_url = models.URLField(default='https://www.instagram.com/')
     is_twitter_enabled = models.BooleanField(default=False)
     twitter_url = models.URLField(default='https://twitter.com/')
     is_linkedin_enabled = models.BooleanField(default=False)
     linkedin_url = models.URLField(default='https://linkedin.com/')
 
     copyright = models.TextField(default="""<p>
-&copy; Copyright <strong><span>Dental Experience</span></strong>. All Rights Reserved.
+&copy; Copyright <strong><span>InGenios</span></strong>. All Rights Reserved.
 </p>""")
 
     credits = models.TextField(default="""<p>
-Designed by <a href="https://ingenios.com.ar/">InGenios</a> and <a href="https://bootstrapmade.com/">BootstrapMade</a>
+Designed by <a href="https://ingenios.com.ar/">InGenios</a>
 </p>""")
 
     def __str__(self):
-        return "Footer"    
+        return "Footer"
