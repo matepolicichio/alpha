@@ -71,9 +71,9 @@ class SectionSelection(models.Model):
         ('promociones/article_details.html', 'page - promociones - detalle'),
     ]
 
-    page = models.CharField(max_length=255, choices=TEMPLATE_CHOICES)
-    section = models.CharField(max_length=255, choices=SECTION_CHOICES)
-    section_name = models.CharField(max_length=255, help_text='Requerido, nombre que se utilizará en el menu de navegación en caso de ser habilitado -> nav_enabled')
+    page = models.CharField(max_length=255, default='default', choices=TEMPLATE_CHOICES)
+    section = models.CharField(max_length=255, default='default', choices=SECTION_CHOICES)
+    section_name = models.CharField(max_length=255, default='default', help_text='Requerido, nombre que se utilizará en el menu de navegación en caso de ser habilitado -> nav_enabled')
     section_html_id = models.CharField(max_length=255, default='default', help_text='Debe ser unico dentro de una misma sección, se recomienda mantener en mismo entre páginas, en minisculas y sin espacios')
     sort_order = models.IntegerField()
     is_visible = models.BooleanField(default=True)
