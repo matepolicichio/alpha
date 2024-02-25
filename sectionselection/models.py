@@ -74,7 +74,7 @@ class SectionSelection(models.Model):
     page = models.CharField(max_length=255, choices=TEMPLATE_CHOICES)
     section = models.CharField(max_length=255, choices=SECTION_CHOICES)
     section_name = models.CharField(max_length=255, help_text='Requerido, nombre que se utilizará en el menu de navegación en caso de ser habilitado -> nav_enabled')
-    section_html_id = models.CharField(max_length=255, help_text='Debe ser unico dentro de una misma sección, se recomienda mantener en mismo entre páginas, en minisculas y sin espacios')
+    section_html_id = models.CharField(max_length=255, default='default', help_text='Debe ser unico dentro de una misma sección, se recomienda mantener en mismo entre páginas, en minisculas y sin espacios')
     sort_order = models.IntegerField()
     is_visible = models.BooleanField(default=True)
     nav_enabled = models.BooleanField(default=False)
