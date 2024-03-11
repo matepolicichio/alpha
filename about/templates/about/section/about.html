@@ -1,0 +1,39 @@
+{% load static %}
+
+<section id="{{ section_selection.section_html_id }}" class="about">
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center gy-5">
+
+      {% if about_page_content %}
+      <div class="{{ about_page_content.title_class }} section-title">
+          <a href="{% url 'about:index' %}">
+              <h2>{{ about_page_content.name }}</h2>
+          </a>
+          {{ about_page_content.description|safe }}
+      </div>
+      {% endif %}
+
+      {% if about %}
+      <div class="{% if about_page_content %}{{ about_page_content.boxes_group_class }}{% endif %}">
+        <div class="row gy-4 icon-boxes">
+          {% for item in about %}
+            <div class="{{ item.box_class }}" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}00">
+              {{ item.box_content | safe }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    
+    </div>
+  </div>
+
+<style>
+.about {
+  --color-background: {{ about_page_content.color_background }};
+}
+{{ about_page_content.css_about }}
+</style>
+
+</section>

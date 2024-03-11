@@ -3,15 +3,14 @@
 
 {% block head %}
     {% include 'base/head.html' %}
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>{% block title %}{{ head.title }}{% endblock %}</title>
 {% endblock %}
 
 <body {% block body_class %}class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu"{% endblock %}>
 
-    <!-- Google Tag Manager (noscript) -->
-    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCSLDSN7"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
-    <!-- End Google Tag Manager (noscript) -->
+    {% if head and head.google_tag_manager_in_body %}
+    {{ head.google_tag_manager_in_body | safe }}
+    {%  endif %}    
 
     {% block header %}
         {% include 'base/header.html' %}

@@ -1,14 +1,18 @@
 from django.shortcuts import render
-from .models import Header, Footer
+from .models import Header, Footer, Head, Style
 from .forms import ContactForm
 from promociones.models import Post as PromoPost
 from promociones.models import Page as PromoPage
 from hero.models import Hero
+from about.models import About
+from about.models import Page as AboutPage
 from calltoaction.models import CallToAction
 from services.models import Post as ServicePost
 from services.models import Page as ServicePage
 from sectionselection.models import SectionSelection
-from testimonials.models import Testimonial, Page
+from testimonials.models import Testimonial
+from testimonials.models import Page as TestimonialPage
+
 import random
 from random import choice
 
@@ -24,6 +28,8 @@ def index(request):
     nav_menu = SectionSelection.objects.filter(
         nav_enabled=True)
     
+    head = Head.objects.first()
+    css_style = Style.objects.first()
     header = Header.objects.first()
     footer = Footer.objects.first()
 
@@ -35,6 +41,13 @@ def index(request):
 
     enabled_hero = Hero.objects.filter(is_enabled=True)
     hero = choice(enabled_hero) if enabled_hero.exists() else None
+
+    about = About.objects.filter(is_visible=True).order_by('sort_order')
+
+    enabled_about_page_content = AboutPage.objects.filter(is_enabled=True)    
+    about_page_random_content = None
+    if enabled_about_page_content.exists():
+        about_page_random_content = random.choice(enabled_about_page_content)
 
     enabled_promo_page_content = PromoPage.objects.filter(is_enabled=True)
     promo_page_random_content = None
@@ -48,7 +61,7 @@ def index(request):
 
     testimonials = Testimonial.objects.filter(is_visible=True).order_by('sort_order')
 
-    enabled_tstmnls_page_content = Page.objects.filter(is_enabled=True)    
+    enabled_tstmnls_page_content = TestimonialPage.objects.filter(is_enabled=True)    
     tstmnls_page_random_content = None
     if enabled_tstmnls_page_content.exists():
         tstmnls_page_random_content = random.choice(enabled_tstmnls_page_content)
@@ -56,9 +69,13 @@ def index(request):
     context = {
         'sections': sections,
         'nav_menu': nav_menu,
+        'head': head,
+        'css_style': css_style,
         'header': header,
         'footer': footer,
         'hero': hero,
+        'about': about,
+        'about_page_content': about_page_random_content,
         'promo_posts': promo_posts,
         'service_posts': service_posts,
         'calltoaction': calltoaction,

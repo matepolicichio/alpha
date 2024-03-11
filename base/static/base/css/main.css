@@ -1,13 +1,11 @@
 /* Fonts */
 :root {
-  --font-default: 'Open Sans', 'Montserrat', 'Lato', 'Inter', sans-serif;
-  --font-primary: 'Roboto', sans-serif;
-  --font-secondary: 'Amatic SC', sans-serif;
-  --font-tertiary: 'Montserrat', sans-serif;
-  --font-quaternary: 'Lato', sans-serif;
-  --font-quinary: 'Inter', sans-serif;
-  --font-special: 'Amatic SC', cursive;
+  --font-default: 'Open Sans', sans-serif;
+  --font-primary: 'Open Sans', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
 }
+
+/* 'Roboto', 'Madimi One', 'Amatic SC', 'Montserrat', 'Lato', 'Inter' */
 
 /* Global Colors */
 :root {
@@ -81,7 +79,6 @@ section {
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  /* padding-bottom: 60px; */
   padding-bottom: 20px;
 }
 
@@ -92,7 +89,7 @@ section {
   position: relative;
 }
 
-.section-title h2:before,
+/* .section-title h2:before,
 .section-title h2:after {
   content: "";
   width: 50px;
@@ -107,7 +104,7 @@ section {
 
 .section-title h2:after {
   margin: 0 0 10px 15px;
-}
+} */
 
 .section-title p {
   margin-bottom: 0;
@@ -122,17 +119,16 @@ section {
   padding: 80px 0;
 } */
 
-.section-bg {
+/* .section-bg {
   background-color: #eee;
-}
+} */
 
-.section-header {
+/* .section-header {
   text-align: center;
-  /* padding-bottom: 30px; */
   padding-bottom: 20px;
-}
+} */
 
-.section-header h2 {
+/* .section-header h2 {
   font-size: 13px;
   letter-spacing: 1px;
   font-weight: 400;
@@ -156,12 +152,11 @@ section {
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   font-family: var(--font-default);
-}
+} */
 
-
-.section-header p span {
+/* .section-header p span {
   color: var(--color-primary);
-}
+} */
 
 
 /*--------------------------------------------------------------
@@ -1273,14 +1268,14 @@ section {
 
 .about .icon-boxes .col-md-6:nth-child(2) .icon-box,
 .about .icon-boxes .col-md-6:nth-child(4) .icon-box {
-  margin-top: 0px;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
 
   .about .icon-boxes .col-md-6:nth-child(2) .icon-box,
   .about .icon-boxes .col-md-6:nth-child(4) .icon-box {
-    margin-top: 0;
+    margin-top: 20px;
   }
 }
 

@@ -1,5 +1,6 @@
 from django.db import models
-from .config import CONTENT_DEFAULTS
+from .config import CONTENT_DEFAULTS, HEAD_DEFAULTS, CSS_DEFAULTS
+from colorfield.fields import ColorField
 from django.core.exceptions import ValidationError
 
 def validate_numeric_whatsapp_number(value):
@@ -15,6 +16,72 @@ class Contact(models.Model):
     def __str__(self):
         return self.email
     
+    
+class Head(models.Model):
+
+    title = models.CharField(max_length=255, default='MyTitle')
+    google_tag = models.TextField(null=True, blank=True, default=HEAD_DEFAULTS['google_tag'])
+    google_tag_manager_in_head = models.TextField(null=True, blank=True, default=HEAD_DEFAULTS['google_tag_manager_in_head'])
+    google_tag_manager_in_body = models.TextField(null=True, blank=True, default=HEAD_DEFAULTS['google_tag_manager_in_body'])
+    meta_tag = models.TextField(null=True, blank=True, default=HEAD_DEFAULTS['meta_tag'])
+    social_meta_tag = models.TextField(null=True, blank=True, default=HEAD_DEFAULTS['social_meta_tag'])
+    favicon = models.ImageField(null=True, blank=True, upload_to="images/favicon/", default=None)
+
+class Style(models.Model):
+
+    google_fonts = models.TextField(null=True, blank=True, default=CSS_DEFAULTS['google_fonts'])
+    css_fonts = models.TextField(null=True, blank=True, default=CSS_DEFAULTS['css_fonts'])
+
+    color_default= ColorField(default='#212529')
+    color_default_rgb = models.CharField(max_length=11, blank=True, null=True,
+                                        help_text = 'Se calcula automaticamente una vez guardado')
+
+    color_background = ColorField(default='#ffffff')
+    color_background_rgb = models.CharField(max_length=11, blank=True, null=True,
+                                        help_text = 'Se calcula automaticamente una vez guardado')
+    
+    color_primary = ColorField(default='#0084c9')
+    color_primary_rgb = models.CharField(max_length=11, blank=True, null=True,
+                                        help_text = 'Se calcula automaticamente una vez guardado')
+    
+    color_secondary = ColorField(default='#32353a')
+    color_secondary_rgb = models.CharField(max_length=11, blank=True, null=True,
+                                        help_text = 'Se calcula automaticamente una vez guardado')
+    
+    color_box_background = ColorField(default='#ffffff')
+    color_box_background_rgb = models.CharField(max_length=11, blank=True, null=True,
+                                        help_text = 'Se calcula automaticamente una vez guardado')
+    
+    color_inverse = ColorField(default='#ffffff')
+    color_inverse_rgb = models.CharField(max_length=11, blank=True, null=True,
+                                        help_text = 'Se calcula automaticamente una vez guardado')
+
+    color_nav = ColorField(default='#3a3939')
+    color_nav_hover = ColorField(default='#32869e')
+    color_nav_dropdown = ColorField(default='#3a3939')
+    color_nav_dropdown_hover = ColorField(default='#32869e')
+    color_nav_dropdown_background = ColorField(default='#ffffff')
+    color_nav_mobile_background = ColorField(default='#ffffff')
+
+    css_general = models.TextField(null=True, blank=True, default=CSS_DEFAULTS['css_general'])
+    css_section_title =  models.TextField(null=True, blank=True, default=CSS_DEFAULTS['css_section_title'])
+
+    def save(self, *args, **kwargs):
+        # Update RGB values for color fields
+        self.color_default_rgb = self.hex_to_rgb(self.color_default)
+        self.color_background_rgb = self.hex_to_rgb(self.color_background)
+        self.color_primary_rgb = self.hex_to_rgb(self.color_primary)
+        self.color_secondary_rgb = self.hex_to_rgb(self.color_secondary)
+        self.color_box_background_rgb = self.hex_to_rgb(self.color_box_background)
+        self.color_inverse_rgb = self.hex_to_rgb(self.color_inverse)
+        super().save(*args, **kwargs)
+
+    def hex_to_rgb(self, hex_color):
+        # Convert hex color to RGB
+        hex_color = hex_color.lstrip('#')
+        return ','.join(str(int(hex_color[i:i+2], 16)) for i in (0, 2, 4))
+
+
 class Header(models.Model):
 
     logo_image = models.ImageField(null=True, blank=True, upload_to="images/header/", default=None)

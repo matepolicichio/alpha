@@ -15,10 +15,6 @@ class Testimonial(models.Model):
     show_caption = models.BooleanField(default=True)
     iframe_code = models.TextField(null=True, blank = True)
 
-    def __str__(self):
-        return self.title
-
-
     sort_order = models.IntegerField(default=1)
     is_visible = models.BooleanField(default=True)   
     created_at = models.DateField(auto_now_add=True)

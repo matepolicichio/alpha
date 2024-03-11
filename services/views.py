@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category, Tag, Page
-from base.models import Header, Footer
+from base.models import Header, Footer, Head, Style
 from sectionselection.models import SectionSelection
 from calltoaction.models import CallToAction
 from .forms import PostForm
@@ -25,6 +25,8 @@ def HomeView(request):
     nav_menu = SectionSelection.objects.filter(
         nav_enabled=True)
     
+    head = Head.objects.first()
+    css_style = Style.objects.first()
     header = Header.objects.first()
     footer = Footer.objects.first()    
     
@@ -41,6 +43,8 @@ def HomeView(request):
     context = {
         'sections': sections,
         'nav_menu': nav_menu,
+        'head': head,
+        'css_style': css_style,         
         'header': header,
         'footer': footer,
         'service_posts': posts,

@@ -1,71 +1,67 @@
 {% load static %}
 
 <head>
-<!-- Google Tag Manager -->
-<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PCSLDSN7');</script> -->
-  <!-- End Google Tag Manager -->
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- HTML Meta Tags -->
-  <meta name="description"
-    content="...">
-  <meta name="keywords" content="...">
+  {% if head %}
+  {{ head.google_tag | safe }}
+  {{ head.google_tag_manager_in_head | safe }}
+  {{ head.meta_tags | safe }}
+  {{ head.social_meta_tags | safe }}
 
-  <!-- Open Graph Meta Tags for WhatsApp -->
-  <meta property="og:title" content="Title...">
-  <meta property="og:description"
-    content="Description ...">
-  <meta property="og:image" content="{% static 'base/img/logo_solo.png' %}">
-
-  <!-- Fallback for other social media platforms -->
-  <meta property="og:url" content="https://ingenios.com.ar/">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="ingenios.com.ar/">
-  <meta property="twitter:url" content="https://ingenios.com.ar/">
-  <meta name="twitter:title" content="Title...">
-  <meta name="twitter:description"
-    content="Description...">
-  <meta name="twitter:image" content="{% static 'base/img/image.png' %}">
-
-  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
-
+  {% if head.favicon %}
   <!-- Favicons -->
-  <link href="{% static 'base/img/logo_solo.png' %}" rel="icon">
+  <link href="{{ head.favicon.url }}" rel="icon">
+  {% endif %}  
 
-  <!-- Fonts -->
-    <!-- Link to the specified fonts from Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Montserrat:wght@400;700&family=Lato:wght@400;700&family=Inter:wght@400;700&family=Amatic+SC&display=swap">
-
+  {% endif %}
 
   <!-- Vendor CSS Files -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <link href="../../static/base/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../../static/base/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="../../static/base/vendor/aos/aos.css" rel="stylesheet">
+  <link href="{% static 'base/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'base/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'base/vendor/aos/aos.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" type="text/css" href="{% static 'base/css/main.css' %}">
 
- <!-- Google tag (gtag.js) -->
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGLMCQS3FX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-ZGLMCQS3FX');
-</script> -->
+  {{ css_style.google_fonts | safe }}
+  {% if css_style %}
+    {{ css_style.google_fonts | safe }}
+    <style>
+      /* Global Colors */
+      :root {
+        --color-default: {{ css_style.color_default }};
+        --color-default-rgb: {{ css_style.color_default_rgb }};
+        --color-background: {{ css_style.color_bachground }};
+        --color-background-rgb: {{ css_style.color_background_rgb }};
+        --color-primary: {{ css_style.color_primary }};
+        --color-primary-rgb: {{ css_style.color_primary_rgb }};
+        --color-secondary: {{ css_style.color_secondary }};
+        --color-secondary-rgb: {{ css_style.color_secondary_rgb }};
+        --color-box-background: {{ css_style.color_box_background }};
+        --color-box-background-rgb: {{ css_style.color_box_background_rgb }};
+        --color-inverse: {{ css_style.color_inverse }};
+        --color-inverse-rgb: {{ css_style.color_inverse_rgb }};
+
+        --color-nav: {{ css_style.color_nav }};
+        --color-nav-hover: {{ css_style.color_nav_hover }};
+        --color-nav-dropdown: {{ css_style.color_nav_dropdown }};
+        --color-nav-dropdown-hover: {{ css_style.color_nav_dropdown_hover }};
+        --color-nav-dropdown-background: {{ css_style.color_nav_dropdown_background }};
+        --color-nav-mobile-background: {{ css_style.color_nav_mobile_background }};
+      }
+    {{ css_style.css_section_title | safe }}
+    </style>
+
+    {% else %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap" rel="stylesheet">
+    {% endif %}
 
 </head>
