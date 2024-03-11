@@ -29,10 +29,11 @@
   <link rel="stylesheet" type="text/css" href="{% static 'base/css/main.css' %}">
 
 
-  {{ css_style.google_fonts | safe }}
   {% if css_style %}
     {{ css_style.google_fonts | safe }}
     <style>
+      {{ css_style.css_fonts | safe }}
+
       /* Global Colors */
       :root {
         --color-default: {{ css_style.color_default }};
