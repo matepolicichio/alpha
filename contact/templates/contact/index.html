@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ contact_page_content.name }}{% endblock %}
+
+{% block body_class %}
+class="blog-page" data-bs-spy="scroll" data-bs-target="#navmenu"
+{% endblock %}
+
+{% block main %}
+
+<main id="main">
+
+<div class="top-space" style="height: 100px;"></div>
+
+{% if sections %}
+    {% for section_selection in sections %}
+        {% include section_selection.section %}
+    {% endfor %}
+{% endif %}
+
+</main>
+
+{% endblock %}

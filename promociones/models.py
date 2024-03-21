@@ -43,6 +43,12 @@ class PostCard(models.Model):
     title = models.CharField(max_length=255, default='PostCard #...')
     show_title = models.BooleanField(default=False)
     header_image = models.ImageField(null=True, blank=True, upload_to="images/promociones/postcard", default=None)
+    image_class = models.CharField(max_length=255, null=True, blank=True,
+                                default='img-fluid',
+                                help_text='solo aplica si la imagen se encuentra cargada')
+    video = models.FileField(upload_to="videos/promociones/postcard", null=True, blank=True, default=None)
+    video_class = models.CharField(max_length=255, null=True, blank=True, default='img-fluid')
+    video_attribute = models.CharField(max_length=255, null=True, blank=True, default='controls muted')
     body = RichTextField(blank=True, null=True)
 
     expiration_date = models.DateField(null=True, blank=True, help_text='Fecha de expiración del postcard, a partir de la cual dejará de mostrarse')
@@ -51,7 +57,6 @@ class PostCard(models.Model):
 
     available_quantity = models.IntegerField(default=10, help_text='Cantidad de unidades disponibles')
     show_metrics = models.BooleanField(default=True, help_text='Se mostrarán las métricas para cada uno de los PostCards')
-
 
     is_whatsapp_enabled = models.BooleanField(default=True, help_text='Habilitar el botón de whatsapp')
     whats_number = models.CharField(

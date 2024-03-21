@@ -1,0 +1,42 @@
+{% load static %}
+
+<section id="{{ section_selection.section_html_id }}" class="contact">
+  
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+    <div class="row align-items-center gy-5">
+
+      {% if contact_page_content %}
+      <div class="{{ contact_page_content.title_class }} section-title">
+          <a href="{% url 'contact:index' %}">
+              <h2>{{ contact_page_content.name }}</h2>
+          </a>
+          {{ contact_page_content.description | safe }}
+      </div>
+      <div class="{{ contact_page_content.iframe_class }} mb-3">
+        {{ contact_page_content.iframe | safe }}
+      </div>
+      {% endif %}
+    
+    </div>
+  
+    {% if contact %}
+      <div class="row gy-4">
+        {% for item in contact %}
+          <div class="{{ item.info_item_class }}" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}00">
+            {{ item.info_item_content | safe }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+
+<style>
+.contact {
+  --color-background: {{ contact_page_content.color_background }};
+}
+{{ contact_page_content.css_contact }}
+</style>
+
+</section>

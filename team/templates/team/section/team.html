@@ -1,0 +1,100 @@
+{% load static %}
+
+<section id="{{ section_selection.section_html_id }}" class="team">
+    <div class="container data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-center gy-5">
+
+            {% if team_page_content %}
+            <div class="{{ team_page_content.title_class }} section-title">
+                <a href="{% url 'team:index' %}">
+                    <h2>{{ team_page_content.name }}</h2>
+                </a>
+                {{ team_page_content.description | safe }}
+            </div>
+            {% endif %}
+      
+            {% if teams %}
+            <div class="{% if team_page_content %}{{ team_page_content.content_class }}{% endif %}">
+
+                <div id="carouselTeam" class="{{ team_page_content.carousel_class }}" data-bs-ride="{{ team_page_content.carousel_data_ride }}" data-bs-interval="{{ team_page_content.carousel_interval }}">
+            
+                    <div class="carousel-indicators align-items-center">
+                        {% for team in teams %}
+                        <button type="button" data-bs-target="#carouselTeam" data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="button {% if forloop.first %}active{% endif %}"
+                            aria-current="{% if forloop.first %}true{% endif %}"
+                            aria-label="Slide {{ forloop.counter }}">
+                        </button>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="carousel-inner">
+                    {% for team in teams %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+                            {% if team.video %}
+                            <div class="text-center">
+                                <video id="video-{{ forloop.counter }}" class="{{ team.video_class }}" {{ team.video_attribute }}>
+                                    <source src="{{ team.video.url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            {% elif team.image %}
+                            <div class="text-center">
+                                <img src="{{ team.image.url }}" class="{{ team.image_class }}" alt="Team Image">
+                            </div>
+                            {% elif team.iframe_code %}
+                            <div class="{{ team.iframe_class }}">
+                                {{ team.iframe_code | safe }}
+                            </div>
+                            {% endif %}
+
+                            {{ team.body | safe }}                            
+
+                            <div class="indicator-space"></div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTeam" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTeam" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            {% endif %}  
+        </div>
+    </div>
+
+    <style>
+    .team {
+    --color-background: {{ team_page_content.color_background }};
+    }
+    {{ team_page_content.css_team }}
+    </style>
+
+    {% if team_page_content.carousel_video_autoplay %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var carousel = document.getElementById("carouselTeam");
+            var videos = carousel.querySelectorAll("video");
+            
+            carousel.addEventListener("slid.bs.carousel", function() {
+                videos.forEach(function(video) {
+                    video.pause(); // Pause all videos
+                    video.currentTime = 0; // Reset video to start
+                });
+                
+                var activeVideo = carousel.querySelector(".carousel-item.active video");
+                if (activeVideo) {
+                    activeVideo.play(); // Play video on active slide
+                }
+            });
+        });
+    </script>
+    {% endif %}
+
+</section>

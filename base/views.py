@@ -6,6 +6,8 @@ from promociones.models import Page as PromoPage
 from hero.models import Hero
 from about.models import About
 from about.models import Page as AboutPage
+from contact.models import Contact
+from contact.models import Page as ContactPage
 from calltoaction.models import CallToAction
 from services.models import Post as ServicePost
 from services.models import Page as ServicePage
@@ -43,11 +45,16 @@ def index(request):
     hero = choice(enabled_hero) if enabled_hero.exists() else None
 
     about = About.objects.filter(is_visible=True).order_by('sort_order')
-
     enabled_about_page_content = AboutPage.objects.filter(is_enabled=True)    
     about_page_random_content = None
     if enabled_about_page_content.exists():
         about_page_random_content = random.choice(enabled_about_page_content)
+
+    contact = Contact.objects.filter(is_visible=True).order_by('sort_order')
+    enabled_contact_page_content = ContactPage.objects.filter(is_enabled=True)    
+    contact_page_random_content = None
+    if enabled_contact_page_content.exists():
+        contact_page_random_content = random.choice(enabled_contact_page_content)
 
     enabled_promo_page_content = PromoPage.objects.filter(is_enabled=True)
     promo_page_random_content = None
@@ -74,12 +81,14 @@ def index(request):
         'header': header,
         'footer': footer,
         'hero': hero,
-        'about': about,
+        'about': about, 
         'about_page_content': about_page_random_content,
-        'promo_posts': promo_posts,
-        'service_posts': service_posts,
+        'contact': contact, 
+        'contact_page_content': contact_page_random_content,
         'calltoaction': calltoaction,
+        'promo_posts': promo_posts,
         'promo_page_content': promo_page_random_content,
+        'service_posts': service_posts,
         'service_page_content': service_page_random_content,
         'testimonials': testimonials,
         'tstmnls_page_content': tstmnls_page_random_content,

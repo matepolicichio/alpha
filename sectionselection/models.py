@@ -2,14 +2,14 @@ from django.db import models
 
 class SectionSelection(models.Model):
     SECTION_CHOICES = [
-        ('base/section/contact.html', 'main - contacto'),
         ('base/section/faq.html', 'main - preguntas frecuentes'),
         ('base/section/features.html', 'main - distintivos'),
         ('base/section/portfolio.html', 'main - experiencia'),
         ('base/section/stats.html', 'main - estadísticas'),
-        ('base/section/team.html', 'main - equipo'),
         ('hero/section/hero.html', 'section - hero'),
-        ('about/section/about.html', 'section - about'), 
+        ('about/section/about.html', 'section - about'),
+        ('contact/section/contact.html', 'section - contact'),
+        ('team/section/team.html', 'section - team'),
         ('calltoaction/section/call2action.html', 'section - calltoaction'),
         ('testimonials/section/testimonials.html', 'section - testimonials'),
         ('promociones/section/posts.html', 'section - promociones - listado'),
@@ -20,7 +20,9 @@ class SectionSelection(models.Model):
 
     TEMPLATE_CHOICES = [
         ('base/index.html', 'page - main'),
-        ('about/index.html', 'page - about'),    
+        ('about/index.html', 'page - about'),
+        ('contact/index.html', 'page - contact'),
+        ('team/index.html', 'page - team'),
         ('testimonials/index.html', 'page - testimonios'),
         ('services/home.html', 'page - servicios - listado'),
         ('services/article_details.html', 'page - servicios - detalle'),
