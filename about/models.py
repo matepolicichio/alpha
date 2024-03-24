@@ -1,5 +1,5 @@
 from django.db import models
-from base.config import CSS_ABOUT_DEFAULTS
+from about.config import CSS_ABOUT_DEFAULTS
 from colorfield.fields import ColorField
 
 class Page(models.Model):
@@ -12,7 +12,7 @@ class Page(models.Model):
     title_class= models.CharField(max_length=255, null=True, blank=True,
                                    default='col-lg-12', 
                                    help_text='cantidad de columnas bootstrap (max=12) para el título y descripción')
-    boxes_group_class = models.CharField(max_length=100, null=True, blank=True,
+    content_class = models.CharField(max_length=100, null=True, blank=True,
                                    default='col-lg-12', 
                                    help_text='cantidad de columnas bootstrap (max=12) para el grupo de bloques')
     is_enabled = models.BooleanField(default=True)
@@ -29,7 +29,8 @@ class About(models.Model):
                                    default='col-lg-4', 
                                    help_text='cantidad de columnas bootstrap (max=12) por cada uno de los bloques')
     box_content = models.TextField(default = 
-"""<div class="icon-box">
+"""
+<div class="icon-box">
   <i class="bi bi-star-fill img-fluid"></i>
   <h3>Título</h3>
   <p>Descripción...</p>
@@ -38,4 +39,3 @@ class About(models.Model):
     
     sort_order = models.IntegerField(default=1)
     is_visible = models.BooleanField(default=True)
-

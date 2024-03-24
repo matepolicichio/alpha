@@ -1,5 +1,5 @@
 from django.db import models
-from .config import CONTENT_DEFAULTS, HEAD_DEFAULTS, CSS_DEFAULTS
+from base.config import CONTENT_DEFAULTS, HEAD_DEFAULTS, CSS_DEFAULTS, HEADER_DEFAULTS
 from colorfield.fields import ColorField
 from django.core.exceptions import ValidationError
 
@@ -85,7 +85,7 @@ class Style(models.Model):
 class Header(models.Model):
 
     logo_image = models.ImageField(null=True, blank=True, upload_to="images/header/", default=None)
-    logo_text = models.CharField(max_length=255, default='<div class="d-flex flex-column"><h1 class="no-margin">Logo</h1><h2 class="no-margin">LOGO</h2></div>')
+    logo_text = models.TextField(null=True, blank=True, default=HEADER_DEFAULTS['logo_text'])
     
     is_getstarted_enabled = models.BooleanField(default=False)
     getstarted_link2section = models.CharField(max_length=255, default="nosotros")
@@ -101,7 +101,11 @@ class Header(models.Model):
         )
     whats_message = models.TextField(null=True, blank=True, default=CONTENT_DEFAULTS['whats_message'])
     whats_btn_text = models.CharField(max_length=255, default=CONTENT_DEFAULTS['whats_btn_text'])
- 
+
+    css_global_header = models.TextField(null=True, blank=True, default=HEADER_DEFAULTS['css_global_header'])
+    css_navigation_menu = models.TextField(null=True, blank=True, default=HEADER_DEFAULTS['css_navigation_menu'])
+    css_mobile_navigation = models.TextField(null=True, blank=True, default=HEADER_DEFAULTS['css_mobile_navigation'])
+
     def __str__(self):
         return "Header"
     

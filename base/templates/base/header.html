@@ -40,4 +40,13 @@
       {% endif %}
 
     </div>
+
+    {% if header %}
+    <style>
+      {{ header.css_global_header }}
+      {{ header.css_navigation_menu }}
+      {{ header.css_mobile_navigation }}
+    </style>
+    {% endif %}
+
   </header><!-- End Header -->

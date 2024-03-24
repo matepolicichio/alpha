@@ -7,9 +7,18 @@ class HeadAdmin(admin.ModelAdmin):
 admin.site.register(Head, HeadAdmin)
 
 class HeaderAdmin(admin.ModelAdmin):
-    def get_list_display(self, request):
-        return [field.name for field in Header._meta.fields]
-
+    list_display = ['id',
+                    'logo_image',
+                    'logo_text',
+                    'is_getstarted_enabled',
+                    'getstarted_link2section',
+                    'getstarted_text',
+                    'is_whatsapp_enabled',
+                    'whats_number',
+                    'whats_message',                    
+                    'whats_btn_text',
+                    ]
+    
 admin.site.register(Header, HeaderAdmin)
 
 class FooterAdmin(admin.ModelAdmin):

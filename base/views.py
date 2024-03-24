@@ -12,6 +12,8 @@ from calltoaction.models import CallToAction
 from services.models import Post as ServicePost
 from services.models import Page as ServicePage
 from sectionselection.models import SectionSelection
+from team.models import Team
+from team.models import Page as TeamPage
 from testimonials.models import Testimonial
 from testimonials.models import Page as TestimonialPage
 
@@ -66,6 +68,13 @@ def index(request):
     if enabled_service_page_content.exists():
         service_page_random_content = random.choice(enabled_service_page_content)
 
+    teams = Team.objects.filter(is_visible=True).order_by('sort_order')
+
+    enabled_team_page_content = TeamPage.objects.filter(is_enabled=True)    
+    team_page_random_content = None
+    if enabled_team_page_content.exists():
+        team_page_random_content = random.choice(enabled_team_page_content)
+
     testimonials = Testimonial.objects.filter(is_visible=True).order_by('sort_order')
 
     enabled_tstmnls_page_content = TestimonialPage.objects.filter(is_enabled=True)    
@@ -90,6 +99,8 @@ def index(request):
         'promo_page_content': promo_page_random_content,
         'service_posts': service_posts,
         'service_page_content': service_page_random_content,
+        'teams': teams,
+        'team_page_content': team_page_random_content,
         'testimonials': testimonials,
         'tstmnls_page_content': tstmnls_page_random_content,
     }
